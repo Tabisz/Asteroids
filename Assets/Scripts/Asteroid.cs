@@ -42,13 +42,13 @@ public class Asteroid : MonoBehaviour {	// NA ASTEROIDS
 	}
 
 
-	void Update() {
+	void Update() {     
 		AsteroidCount = transform.childCount;
 		if (AsteroidCount < 2)
 		{
 			MakePrefab ();
 		}
-
+                                                                   //sprawdza czy zostala dotknieta jakas asteroida                                     
 		//We check if we have more than one touch happening.
 		//We also check if the first touches phase is Ended (that the finger was lifted)
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) {
@@ -66,7 +66,7 @@ public class Asteroid : MonoBehaviour {	// NA ASTEROIDS
 				//touchedObject should be the object someone touched.
 
 
-				generator.Split (touchedObject);
+				generator.Split (touchedObject);            //rozdziealnie asteroidy na mniejsze
 
 
 			}

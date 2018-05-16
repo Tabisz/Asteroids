@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerGen : MonoBehaviour {
-
+    //generowanie mesha dla gracza w krztalcie trojkata(nieuzywane)
 	// Use this for initialization
 	public void Generate() {
 

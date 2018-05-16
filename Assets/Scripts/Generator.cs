@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 public class Generator : MonoBehaviour {
-
+    /* Generowanie meshow ktore tworza asteroidy*/
 
 	private int radius;
 	private int vertCount;
