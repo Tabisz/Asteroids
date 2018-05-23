@@ -26,6 +26,7 @@ public class PlayerHandler : MonoBehaviour {
 	private GameObject ChangeB;
 	private GameObject ShootB;
 
+    public float gameSpeed = 5;// dodac poruszanie tla bo nie widac ze sie cofasz
 
 	public ParticleSystem.EmissionModule exhaust;
 	// Use this for initialization
@@ -58,7 +59,8 @@ public class PlayerHandler : MonoBehaviour {
 
 		transform.position = new Vector3 (anchor.transform.position.x + translation.x*r*dir,anchor.transform.position.y + translation.y*r*dir, transform.position.z);
 
-		Debug.DrawLine (transform.position,anchor.transform.position,Color.green);
+        anchor.transform.position += Vector3.down * Time.deltaTime* gameSpeed;
+        Debug.DrawLine (transform.position,anchor.transform.position,Color.green);
 	}
 
 	void GetNextAnchor ()
@@ -70,9 +72,9 @@ public class PlayerHandler : MonoBehaviour {
 		
 		Vector3 anchorPos = (transform.position - anchor.transform.position)*2;
 		anchor.transform.position += anchorPos;
-
+         
 	}
-		
+
 
 	void OnShootPointerDown()
 	{

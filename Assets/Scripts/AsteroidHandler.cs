@@ -5,11 +5,6 @@ public class AsteroidHandler : MonoBehaviour { 	//na prefabie
 	private Vector2 way;
 	private int speed = 100;
 	private System.Random rand;
-	private float HBoundX;
-	private float LBoundX;
-
-	private float HBoundY;
-	private float LBoundY;
 
 	private float offset;
 
@@ -20,11 +15,6 @@ public class AsteroidHandler : MonoBehaviour { 	//na prefabie
 		rand = new System.Random ();
 
 
-		HBoundX = CameraSize.HBoundX();
-		LBoundX = CameraSize.LBoundX();
-
-		HBoundY = CameraSize.HBoundY();
-		LBoundY = CameraSize.LBoundY();
 
 		Rigidbody2D RD = GetComponent<Rigidbody2D>();
 		way = GetNewWay ();
@@ -41,34 +31,42 @@ public class AsteroidHandler : MonoBehaviour { 	//na prefabie
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () {// przeniesc to do camerasize, wywolanie jedna funkcja bioraca pozycje i offset, zwracajaca nowa pozycje lub ta sama
+        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.RIGHT,offset,transform.position))
+            transform.position = new Vector3(CameraSize.LBoundX - offset, transform.position.y, transform.position.z);
+        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.LEFT, offset, transform.position))
+            transform.position = new Vector3(CameraSize.HBoundX + offset, transform.position.y, transform.position.z);
 
-		/* ----------przechodzenie z ekranu na ekran---------------------(loopowanie)
-		 if (transform.position.x > HBoundX + offset)
-			transform.position = new Vector3(LBoundX - offset,transform.position.y,transform.position.z);
-		if (transform.position.x < LBoundX - offset)
-			transform.position = new Vector3(HBoundX + offset,transform.position.y,transform.position.z);
-		
-		if (transform.position.y > HBoundY + offset)
-			transform.position = new Vector3(transform.position.x,LBoundY - offset,transform.position.z);
-		if (transform.position.y < LBoundY - offset)
-			transform.position = new Vector3(transform.position.x,HBoundY + offset,transform.position.z);
-			*/
-
-		if (transform.position.x > HBoundX + offset)
-			Destroy (gameObject);
-		if (transform.position.x < LBoundX - offset)
-			Destroy (gameObject);
-
-		if (transform.position.y > HBoundY + offset)
-			Destroy (gameObject);
-		if (transform.position.y < LBoundY - offset)
-			Destroy (gameObject);
-	}
+        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.TOP, offset, transform.position))
+            transform.position = new Vector3(transform.position.x, CameraSize.LBoundY - offset, transform.position.z);
+        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.BOTTOM, offset, transform.position))
+            transform.position = new Vector3(transform.position.x, CameraSize.HBoundY + offset, transform.position.z);
 
 
 
+        /*
+                // ----------przechodzenie z ekranu na ekran---------------------(loopowanie) 
+                 if (transform.position.x > CameraSize.HBoundX + offset)
+                    transform.position = new Vector3(LBoundX - offset,transform.position.y,transform.position.z);
+                if (transform.position.x < LBoundX - offset)
+                    transform.position = new Vector3(HBoundX + offset,transform.position.y,transform.position.z);
+
+                if (transform.position.y > HBoundY + offset)
+                    transform.position = new Vector3(transform.position.x,LBoundY - offset,transform.position.z);
+                if (transform.position.y < LBoundY - offset)
+                    transform.position = new Vector3(transform.position.x,HBoundY + offset,transform.position.z);
+
+                if (transform.position.x > HBoundX + offset)
+                    Destroy (gameObject);
+                if (transform.position.x < LBoundX - offset)
+                    Destroy (gameObject);
+
+                if (transform.position.y > HBoundY + offset)
+                    Destroy (gameObject);
+                if (transform.position.y < LBoundY - offset)
+                    Destroy (gameObject);
+            */
+    }
 
 
 
@@ -76,6 +74,9 @@ public class AsteroidHandler : MonoBehaviour { 	//na prefabie
 
 
 
-		
+
+
+
+
 
 }

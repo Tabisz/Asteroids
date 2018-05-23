@@ -13,8 +13,8 @@ public class BulletScript : MonoBehaviour {
 
 	void Start()
 	{
-		boundX = CameraSize.SizeX () / 2;
-		boundY = CameraSize.SizeY () / 2;
+		boundX = CameraSize.GetSizeX() / 2;
+		boundY = CameraSize.GetSizeY() / 2;
 
 
 	
