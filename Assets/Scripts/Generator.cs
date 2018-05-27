@@ -18,7 +18,7 @@ public class Generator : MonoBehaviour {
 	private IEnumerator SplitC(GameObject hitObject)
 	{
 		AsteroidParam param = hitObject.GetComponentInChildren<AsteroidParam> ();
-		if (param.vertCount > 6) 
+		if (param.radius > 8) 
 		{
 			Generate(param.radius / 2, param.vertCount / 2, param.randomness / 2 ,hitObject.transform.position);
 			yield return new WaitForEndOfFrame ();

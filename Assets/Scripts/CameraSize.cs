@@ -19,6 +19,7 @@ public class CameraSize : MonoBehaviour {
         LBoundY = GetLBoundY();
         SizeX = GetSizeX();
         SizeY = GetSizeY();
+
 }
 
     public static float GetSizeY()

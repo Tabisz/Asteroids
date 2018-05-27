@@ -22,12 +22,6 @@ public class GameHandler : MonoBehaviour {
 	void Awake()
 	{
 		sceneName = SceneManager.GetActiveScene ().name;
-		if (sceneName == "1") {
-			Screen.orientation = ScreenOrientation.LandscapeLeft;
-		} else if (sceneName == "2") 
-		{
-			Screen.orientation = ScreenOrientation.Portrait;
-		}
 
 		playerCount = transform.childCount;
 		Maxplayers = playerCount;
