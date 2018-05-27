@@ -10,7 +10,7 @@ public class PlayerHandler : MonoBehaviour {
 	private Vector3 target;
 
 	[Range(1f,100f)]
-	public  float r;
+	public  float radius;
 	[Range(0f,100f)]
 	public float speed;
 	private float timecounter = 0;
@@ -38,7 +38,7 @@ public class PlayerHandler : MonoBehaviour {
 
 		exhaust = GetComponentInChildren<ParticleSystem> ().emission;
 	    anchor = new GameObject ("anchor "+ gameObject.name);
-		anchor.transform.position = new Vector3 (transform.position.x + r,transform.position.y,0f);
+		anchor.transform.position = new Vector3 (transform.position.x + radius,transform.position.y,0f);
 		anchor.transform.SetParent (Camera.main.transform);
 
 	}
@@ -57,7 +57,7 @@ public class PlayerHandler : MonoBehaviour {
 		newRotation.y = 0.0f;
 		transform.rotation = newRotation;
 
-		transform.position = new Vector3 (anchor.transform.position.x + translation.x*r*dir,anchor.transform.position.y + translation.y*r*dir, transform.position.z);
+		transform.position = new Vector3 (anchor.transform.position.x + translation.x*radius*dir,anchor.transform.position.y + translation.y*radius*dir, transform.position.z);
 
         anchor.transform.position += Vector3.down * Time.deltaTime* gameSpeed;
         Debug.DrawLine (transform.position,anchor.transform.position,Color.green);
@@ -65,13 +65,13 @@ public class PlayerHandler : MonoBehaviour {
 
 	void GetNextAnchor ()
 	{
-		if (dir == 1)
-			dir = -1;
-		else
-			dir = 1;
-		
-		Vector3 anchorPos = (transform.position - anchor.transform.position)*2;
-		anchor.transform.position += anchorPos;
+        Vector3 newAnchorPos = anchor.transform.position+ (transform.position - anchor.transform.position) * 2;
+
+        if (CameraSize.CheckIfOnScreen(0, newAnchorPos))
+        {
+            dir = -dir;
+            anchor.transform.position = newAnchorPos;
+        }
          
 	}
 

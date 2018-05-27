@@ -31,30 +31,10 @@ public class AsteroidHandler : MonoBehaviour { 	//na prefabie
 	}
 	
 	// Update is called once per frame
-	void Update () {// przeniesc to do camerasize, wywolanie jedna funkcja bioraca pozycje i offset, zwracajaca nowa pozycje lub ta sama
-        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.RIGHT,offset,transform.position))
-            transform.position = new Vector3(CameraSize.LBoundX - offset, transform.position.y, transform.position.z);
-        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.LEFT, offset, transform.position))
-            transform.position = new Vector3(CameraSize.HBoundX + offset, transform.position.y, transform.position.z);
-
-        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.TOP, offset, transform.position))
-            transform.position = new Vector3(transform.position.x, CameraSize.LBoundY - offset, transform.position.z);
-        if (CameraSize.CheckIfOnScreen(CameraSize.Bounderies.BOTTOM, offset, transform.position))
-            transform.position = new Vector3(transform.position.x, CameraSize.HBoundY + offset, transform.position.z);
-
-
+	void Update () {
+        transform.position = CameraSize.CheckIfOnScreenWithTransfer(offset, transform.position);
 
         /*
-                // ----------przechodzenie z ekranu na ekran---------------------(loopowanie) 
-                 if (transform.position.x > CameraSize.HBoundX + offset)
-                    transform.position = new Vector3(LBoundX - offset,transform.position.y,transform.position.z);
-                if (transform.position.x < LBoundX - offset)
-                    transform.position = new Vector3(HBoundX + offset,transform.position.y,transform.position.z);
-
-                if (transform.position.y > HBoundY + offset)
-                    transform.position = new Vector3(transform.position.x,LBoundY - offset,transform.position.z);
-                if (transform.position.y < LBoundY - offset)
-                    transform.position = new Vector3(transform.position.x,HBoundY + offset,transform.position.z);
 
                 if (transform.position.x > HBoundX + offset)
                     Destroy (gameObject);

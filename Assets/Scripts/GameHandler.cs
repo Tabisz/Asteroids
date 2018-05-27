@@ -54,23 +54,16 @@ public class GameHandler : MonoBehaviour {
 
 	private void SpawnPlayers()
 	{
-		
-		GameObject[] spwPoints = new GameObject[transform.childCount];
-		for (int i = 0; i < spwPoints.Length; i++)
+        foreach(Transform spwPoint in transform)
 		{
-			spwPoints [i] = transform.GetChild (i).gameObject;
-		}
-
-		for (int i = 0; i < spwPoints.Length; i++)
-		{
-			if (spwPoints[i].name == "SpawnPointR") {
+			if (spwPoint.name == "SpawnPointR") {
 				Debug.Log ("hej");
-				Instantiate (PlayerA, spwPoints[i].transform.position, spwPoints[i].transform.rotation, this.transform);
-				Destroy (spwPoints[i]);
-			} else if (spwPoints[i].name == "SpawnPointB") {
+				Instantiate (PlayerA, spwPoint.position, spwPoint.rotation, transform);
+				Destroy (spwPoint.gameObject);                                          //nie niszczyc spawnpointow jak bede chcial respawny
+			} else if (spwPoint.name == "SpawnPointB") {
 				Debug.Log ("ho");
-				Instantiate (PlayerB, spwPoints[i].transform.position, spwPoints[i].transform.rotation, transform);
-				Destroy (spwPoints[i]);
+				Instantiate (PlayerB, spwPoint.position, spwPoint.rotation, transform);
+				Destroy (spwPoint.gameObject);
 			} else {
 				Debug.Log ("NULL");
 			}
@@ -79,3 +72,4 @@ public class GameHandler : MonoBehaviour {
 	}
 		
 }
+

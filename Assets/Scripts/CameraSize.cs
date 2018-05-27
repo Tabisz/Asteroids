@@ -8,13 +8,17 @@ public class CameraSize : MonoBehaviour {
     public static float HBoundY;
     public static float LBoundX;
     public static float LBoundY;
+    public static float SizeY;
+    public static float SizeX;
 
     private void Awake()
     {
-         HBoundX = GetHBoundX();
-         HBoundY = GetHBoundY();
-         LBoundX = GetLBoundX();
-         LBoundY = GetLBoundY();
+        HBoundX = GetHBoundX();
+        HBoundY = GetHBoundY();
+        LBoundX = GetLBoundX();
+        LBoundY = GetLBoundY();
+        SizeX = GetSizeX();
+        SizeY = GetSizeY();
 }
 
     public static float GetSizeY()
@@ -47,27 +51,40 @@ public class CameraSize : MonoBehaviour {
         return Camera.main.transform.position.y - GetSizeY() / 2;
     }
 
-    public static bool CheckIfOnScreen(Bounderies bd, float offset,Vector3 pos)
+    public static Vector3 CheckIfOnScreenWithTransfer(float offset,Vector3 pos)
     {
-        switch(bd)
-        {
-            case Bounderies.RIGHT:
+
                 if (pos.x > HBoundX + offset)
-                    return true;
-                    break;
-            case Bounderies.LEFT:
-                if (pos.x < LBoundX - offset)
-                    return true;
-                    break;
-            case Bounderies.TOP:
-                if (pos.y > HBoundY + offset)
-                    return true;
-                    break;
-            case Bounderies.BOTTOM:
-                if (pos.y < LBoundY - offset)
-                    return true;
-                    break;
-        }
-        return false;
+            return new Vector3(LBoundX - offset, pos.y, pos.z);
+
+        if (pos.x < LBoundX - offset)
+            return new Vector3(HBoundX + offset, pos.y, pos.z);
+
+        if (pos.y > HBoundY + offset)
+            return new Vector3(pos.x, LBoundY - offset, pos.z);
+
+        if (pos.y < LBoundY - offset)
+                    return new Vector3(pos.x,HBoundY + offset, pos.z);
+
+        return pos;
     }
+    public static bool CheckIfOnScreen(float offset, Vector3 pos)
+    {
+
+        if (pos.x > HBoundX + offset)
+            return false;
+
+        if (pos.x < LBoundX - offset)
+            return false;
+
+        if (pos.y > HBoundY + offset)
+            return false;
+
+        if (pos.y < LBoundY - offset)
+            return false;
+
+        return true;
+    }
+
+
 }

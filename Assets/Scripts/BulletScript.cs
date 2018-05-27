@@ -13,8 +13,8 @@ public class BulletScript : MonoBehaviour {
 
 	void Start()
 	{
-		boundX = CameraSize.GetSizeX() / 2;
-		boundY = CameraSize.GetSizeY() / 2;
+		boundX = CameraSize.SizeX / 2;
+		boundY = CameraSize.SizeY / 2;
 
 
 	
@@ -22,7 +22,7 @@ public class BulletScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		
-		//Debug.Log (collision.gameObject.name);
+		Debug.Log (collision.gameObject.name);
 		if (collision.collider.gameObject.tag == "Asteroids")
 		{
 			Debug.Log ("hop");

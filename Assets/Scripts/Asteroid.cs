@@ -30,7 +30,7 @@ public class Asteroid : MonoBehaviour {	// NA ASTEROIDS
 
 	public void MakePrefab()//temporary
 	{
-		Vector3 pos = new Vector3 (rand.Next (-(int)CameraSize.GetSizeX() / 2,(int)CameraSize.GetSizeX() / 2), transform.position.y, 0);
+		Vector3 pos = new Vector3 (rand.Next (-(int)CameraSize.SizeX / 2,(int)CameraSize.SizeX / 2),transform.position.y, 0);
 		generator.Generate(radius,vertCount,randomness,pos);
 
 
